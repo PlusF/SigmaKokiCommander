@@ -6,14 +6,13 @@ class BaseCommander:
         self.ser: serial.Serial = ser
         self.end = '\r\n'
 
-        self.um_per_pulse = 0.01
-        self.max_speed = 4000000 * self.um_per_pulse  # [um]
+        self.encoding = None
 
     def send(self, order: str):
         if self.ser is None:
             return
         order += self.end
-        self.ser.write(order.encode())
+        self.ser.write(order.encode(self.encoding))
 
     def recv(self) -> str:
         if self.ser is None:

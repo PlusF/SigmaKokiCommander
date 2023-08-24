@@ -17,6 +17,7 @@ from sigmakokicommander.BaseCommander import BaseCommander
 class SC101GCommander(BaseCommander):
     def __init__(self, ser=None):
         super().__init__(ser)
+        self.encoding = 'ascii'
         self.um_per_pulse = 0.1
         self.min_speed = 0  # [um/sec]
         self.max_speed = 2e5  # [um/sec]
