@@ -169,8 +169,10 @@ class SC101GCommander(BaseCommander):
 
         x_sign = '+' if values[0] >= 0 else '-'
         y_sign = '+' if values[1] >= 0 else '-'
+        x_value = abs(int(values[0] / self.um_per_pulse))
+        y_value = abs(int(values[1] / self.um_per_pulse))
 
-        order = f'{command}:W{x_sign}P{abs(int(values[0]))}{y_sign}P{abs(int(values[1]))}'
+        order = f'{command}:W{x_sign}P{x_value}{y_sign}P{y_value}'
         self.send(order)
         self.start_moving()
         return True
@@ -178,7 +180,6 @@ class SC101GCommander(BaseCommander):
     def move_absolute(self, values: list):
         """
         絶対座標指定駆動
-        SC101Gはμm単位で指定する．
         :param values: μm単位の座標値のリスト
         :return:
         """
@@ -187,7 +188,6 @@ class SC101GCommander(BaseCommander):
     def move_relative(self, values: list) -> bool:
         """
         相対座標指定駆動
-        SC101Gはμm単位で指定する．
         :return:
         """
         return self.move('M', values)
