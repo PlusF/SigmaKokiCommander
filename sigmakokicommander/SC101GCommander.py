@@ -1,4 +1,4 @@
-from BaseCommander import BaseCommander
+from sigmakokicommander.BaseCommander import BaseCommander
 
 
 # 実装していないコマンドリスト
