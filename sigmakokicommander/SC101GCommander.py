@@ -11,7 +11,6 @@ from sigmakokicommander.BaseCommander import BaseCommander
 # R:
 # Z:
 # JG:
-# JY:
 # I:
 # O:
 class SC101GCommander(BaseCommander):
@@ -191,6 +190,28 @@ class SC101GCommander(BaseCommander):
         :return:
         """
         return self.move('M', values)
+
+    def jog(self, axis, direction: str, speed: int) -> bool:
+        """
+        ジョグ駆動
+        :param axis: 1 or 2
+        :param direction: '+' or '-'
+        :param speed: 1~9 の整数値
+        :return:
+        """
+        if axis not in [1, 2]:
+            print('axis must be 1 or 2')
+            return False
+        if direction not in ['+', '-']:
+            print('direction must be "+" or "-"')
+            return False
+        if speed < 1 or speed > 9:
+            print('speed must be 1 ~ 9')
+            return False
+
+        order = f'JY:{axis} {direction}{int(speed)}'
+        self.send(order)
+        return True
 
     def stop(self, axis) -> bool:
         """
