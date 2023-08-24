@@ -17,6 +17,6 @@ class BaseCommander:
     def recv(self) -> str:
         if self.ser is None:
             return 'some response'
-        msg = self.ser.readline().decode()
+        msg = self.ser.readline().decode(self.encoding)
         msg.strip(self.end)
         return msg
